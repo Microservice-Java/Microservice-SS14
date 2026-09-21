@@ -34,6 +34,16 @@ Repository lưu trữ bài tập thực hành về **Distributed Transactions (G
 
 ---
 
+### [Bài Tập 4: Sự Đánh Đổi Giữa Tự Do Và Tập Trung (Choreography vs Orchestration)](./BaiTap4)
+- **Mục tiêu**: Phân tích việc tích hợp dịch vụ Voucher (Mã giảm giá), so sánh 2 mô hình Choreography và Orchestration Saga trên 5 tiêu chí kiến trúc, triển khai demo mô hình Orchestration Saga.
+- **Giải pháp**:
+  - Xây dựng bộ điều phối tập trung `OrderSagaOrchestrator` thực thi 4 bước tuần tự: `Order` $\rightarrow$ `Voucher` $\rightarrow$ `Payment` $\rightarrow$ `Shipping`.
+  - Quản lý trạng thái tiến trình `SagaStateData` tập trung, giúp dễ dàng theo dõi (Observability) và trace lỗi.
+  - Tự động kích hoạt bù trừ ngược chiều (Reverse Compensation) khi có bất kỳ bước nào thất bại (`Shipping Failed` $\rightarrow$ Refund Payment $\rightarrow$ Release Voucher $\rightarrow$ Cancel Order).
+- **Báo cáo chi tiết**: [BaoCao_BaiTap4.md](./BaiTap4/BaoCao_BaiTap4.md)
+
+---
+
 ## Hướng dẫn chạy và kiểm thử
 
 ### Bài Tập 1
@@ -51,5 +61,11 @@ cd BaiTap2
 ### Bài Tập 3
 ```bash
 cd BaiTap3
+./gradlew test
+```
+
+### Bài Tập 4
+```bash
+cd BaiTap4
 ./gradlew test
 ```

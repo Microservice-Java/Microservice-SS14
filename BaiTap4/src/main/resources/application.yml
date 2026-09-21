@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: orchestration-saga-order
+  datasource:
+    url: jdbc:h2:mem:orchestrator_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    com.storex.saga: DEBUG
