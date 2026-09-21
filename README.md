@@ -23,6 +23,17 @@ Repository lưu trữ bài tập thực hành về **Distributed Transactions (G
 
 ---
 
+### [Bài Tập 3: Thiết Kế Vũ Điệu Choreography Saga](./BaiTap3)
+- **Mục tiêu**: Phân tích I/O, thiết kế lưu đồ (Flowchart) và mô phỏng chuỗi giao dịch phân tán giữa 3 dịch vụ `Order` $\rightarrow$ `Payment` $\rightarrow$ `Shipping` theo mô hình Choreography Saga.
+- **Giải pháp**:
+  - Xây dựng hệ thống Event Bus phân tán mô phỏng Message Broker (Kafka/RabbitMQ).
+  - Triển khai Happy Path: `OrderCreatedEvent` $\rightarrow$ `PaymentSuccessEvent` $\rightarrow$ `ShippingSuccessEvent` $\rightarrow$ Order `COMPLETED`.
+  - Triển khai Compensating Path khi giao hàng thất bại: `ShippingFailedEvent` $\rightarrow$ `CompensatePaymentEvent` $\rightarrow$ `RefundSuccessEvent` $\rightarrow$ Order `CANCELED`.
+  - Kích hoạt tự động hoàn tiền & hủy đơn khi Shipping Service bị Timeout (>30s).
+- **Báo cáo chi tiết**: [BaoCao_BaiTap3.md](./BaiTap3/BaoCao_BaiTap3.md)
+
+---
+
 ## Hướng dẫn chạy và kiểm thử
 
 ### Bài Tập 1
@@ -34,5 +45,11 @@ cd BaiTap1
 ### Bài Tập 2
 ```bash
 cd BaiTap2
+./gradlew test
+```
+
+### Bài Tập 3
+```bash
+cd BaiTap3
 ./gradlew test
 ```
